@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata" fqn="multiOrgDataRender">
+  <apiVersion>52.0</apiVersion>
+  <isExposed>true</isExposed>
+  <targets>
+    <target>lightning__AppPage</target>
+    <target>lightning__RecordPage</target>
+    <target>lightning__HomePage</target>
+  </targets>
+  <targetConfigs>  
+    <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
+        <property name="objType" type= "String" label="Select object" datasource="Case,Opportunity,Activity"/>
+        <property name="useDummyData" type= "Boolean" label="Use dummy data? If yes, you will be able to set the demo org names below." default="true"/>
+        <property name="heading" type="String" default="Enterprise Cases" label="Enter Title for the Component" />
+        <property name="orgTitleA" type="String" default="Agency" label="Enter demo name for Org A" required="true"/>
+        <property name="orgTitleB" type="String" default="Mergers Subsidiary" label="Enter demo name for Org B" required="true"/>
+        <property name="orgTitleC" type="String" default="Group Insurance" label="Enter demo name for Org C" required="true"/>
+        <property name="orgTitleD" type="String" default="Group Insurance" label="Enter demo name for Org D" required="true"/>
+        <property name="orgTitleE" type="String" default="Mergers Subsidiary" label="Enter demo name for Org E" required="true"/>
+      </targetConfig>
+</targetConfigs>
+</LightningComponentBundle>

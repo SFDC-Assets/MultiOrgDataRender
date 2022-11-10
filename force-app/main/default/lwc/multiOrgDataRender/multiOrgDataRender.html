@@ -1,0 +1,148 @@
+<template>
+  <div class="slds-grid slds-grid_vertical">
+    <lightning-card class="slds-card_boundary" variant="narrow" icon-name="standard:opportunity">
+      <h1 slot="title">{heading}</h1>
+      <div slot="actions">
+        <lightning-button label="Next" slot="actions"></lightning-button>
+      </div>
+      <div>
+
+        <template if:true={isCases}>
+          <lightning-datatable data={casesData} key-field="caseId" columns={columnsCases} hide-checkbox-column="true"
+            onrowaction={handleRowActions} sorted-by={sortByCases} sorted-direction={sortDirectionCases}
+            onsort={doSortingCases}>
+          </lightning-datatable>
+        </template>
+<template if:true={isOpps}>
+          <lightning-datatable data={oppsData} key-field="systemId" columns={columnsOpps} hide-checkbox-column="true"
+            onrowaction={handleRowActions} sorted-by={sortByOpps} sorted-direction={sortDirectionOpps}
+            onsort={doSortingOpps}>
+          </lightning-datatable>
+        </template>
+<template if:true={isActivities}>
+          <lightning-datatable data={activitiesData} key-field="systemId" columns={columnsActivities} hide-checkbox-column="true"
+            onrowaction={handleRowActions} sorted-by={sortByActivities} sorted-direction={sortDirectionActivities}
+            onsort={doSortingActivities}>
+          </lightning-datatable>
+        </template>
+</div>
+</lightning-card>
+</div>
+<!-- modal start -->
+<template if:true={isShowModal}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+      aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <!-- modal header start -->
+        <header class="slds-modal__header">
+          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+            onclick={hideModalBox}>
+            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+            </lightning-icon>
+            <div class="slds-assistive-text">Close</div>
+          </button>
+          <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">{modalHeader}</h2>
+        </header>
+        <!-- modal body start -->
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+          <lightning-formatted-rich-text value={modalHTML}></lightning-formatted-rich-text>
+          <br />
+          <!-- <p>Click <a href="" target="_blank">here</a> to launch record in the source org.</p> -->
+
+        </div>
+
+        <!-- modal footer start-->
+        <footer class="slds-modal__footer">
+          <button class="slds-button slds-button_neutral" onclick={hideModalBox}>
+            Close
+          </button>
+        </footer>
+
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+<!-- modal end -->
+
+<!-- notify modal start -->
+<template if:true={isShowNotifyModal}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-02" aria-modal="true"
+      aria-describedby="modal-content-id-2" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <!-- modal header start -->
+        <header class="slds-modal__header">
+          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+            onclick={hideNotifyModalBox}>
+            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+            </lightning-icon>
+            <div class="slds-assistive-text">Close</div>
+          </button>
+          <h2 id="modal-heading-02" class="slds-text-heading_medium slds-hyphenate">Notify Owner</h2>
+        </header>
+        <!-- modal body start -->
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+          <lightning-textarea name="input1" label="Type a message for the owner..."></lightning-textarea>
+        </div>
+        <!-- <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+            <p>{modalHTML}</p>
+            
+             <p class="modalContent"></p> 
+          </div> -->
+        <!-- <div lwc:dom="manual" -->
+        <!-- <div class="first-class"><lightning-input data-my-id="in1" class="second-class"></lightning-input></div> -->
+
+        <!-- modal footer start-->
+        <footer class="slds-modal__footer">
+          <button class="slds-button slds-button_brand" onclick={hideNotifyModalBox}>
+            Notify
+          </button>
+          <button class="slds-button slds-button_neutral" onclick={hideNotifyModalBox}>
+            Close
+          </button>
+        </footer>
+
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+<!-- modal end -->
+
+<!-- sharing modal start -->
+<template if:true={isShowSharingModal}>
+
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-03" aria-modal="true"
+      aria-describedby="modal-content-id-3" class="slds-modal slds-fade-in-open">
+      <div class="slds-modal__container">
+        <!-- modal header start -->
+        <header class="slds-modal__header">
+          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+            onclick={hideSharingModalBox}>
+            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse" size="small">
+            </lightning-icon>
+            <div class="slds-assistive-text">Close</div>
+          </button>
+          <h2 id="modal-heading-03" class="slds-text-heading_medium slds-hyphenate">Share</h2>
+        </header>
+        <!-- modal body start -->
+        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+          <lightning-textarea name="input2" label="Search users"></lightning-textarea>
+        </div>
+
+        <!-- modal footer start-->
+        <footer class="slds-modal__footer">
+          <button class="slds-button slds-button_brand" onclick={hideSharingModalBox}>
+            Share
+          </button>
+          <button class="slds-button slds-button_neutral" onclick={hideSharingModalBox}>
+            Close
+          </button>
+        </footer>
+
+      </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+  </template>
+<!-- modal end -->
+</template>

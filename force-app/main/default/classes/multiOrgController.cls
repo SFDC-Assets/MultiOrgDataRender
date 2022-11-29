@@ -37,8 +37,8 @@ public with sharing class multiOrgController {
             httpRequest.setEndPoint(endPoint);
             // httpRequest.setTimeout(1300);
             httpResponse= http.send(httpRequest);
-            System.debug('HttpResponse for getEnterpriseCases::::'+httpResponse);
-            System.debug('getEnterpriseCases - HttpResponse.getBody::::'+httpResponse.getBody());
+            // System.debug('HttpResponse for getEnterpriseCases::::'+httpResponse);
+            // System.debug('getEnterpriseCases - HttpResponse.getBody::::'+httpResponse.getBody());
         }catch(Exception e){
             System.debug('Exception in getEnterpriseCases:::::'+e.getLineNumber()+'~~ message:::'+e.getMessage());
         }
@@ -52,19 +52,19 @@ public with sharing class multiOrgController {
         HttpResponse casesResponse;
         try{
             if(dummyData){
-                System.debug('JD dummyData::'+dummyData);
+                // System.debug('JD dummyData::'+dummyData);
                 json2ApexCasesList=JSON2ApexCases.parse(dummyDataCases);
             }
             else{
                 casesResponse= multiOrgController.getCasesfromOrgsAPI();
                 if(casesResponse.getStatusCode() == 200){
-                    System.debug(casesResponse.getBody());
+                    // System.debug(casesResponse.getBody());
                     // System.debug(JSON2ApexCases.parse(casesResponse.getBody()));
 
                     json2ApexCasesList=JSON2ApexCases.parse(casesResponse.getBody());
                 }
             }
-            System.debug('jsonlist::'+json2ApexCasesList);
+            // System.debug('jsonlist::'+json2ApexCasesList);
 
             for(JSON2ApexCases casesDataObj :json2ApexCasesList){
                 CaseDetails obj= new CaseDetails();
@@ -82,8 +82,8 @@ public with sharing class multiOrgController {
         }catch(exception e){
             System.debug('Exception in caseDetailsList:::'+e.getMessage()+'~~~~~Line'+e.getLineNumber());
         }
-        System.debug('caseDetailsList::::'+caseDetailsList);
-        System.debug('caseDetailsList Size:::'+caseDetailsList.size());
+        // System.debug('caseDetailsList::::'+caseDetailsList);
+        // System.debug('caseDetailsList Size:::'+caseDetailsList.size());
         return caseDetailsList;
     }
 
@@ -124,8 +124,8 @@ public with sharing class multiOrgController {
             httpRequest.setEndPoint(endPoint);
             // httpRequest.setTimeout(1300);
             httpResponse= http.send(httpRequest);
-            System.debug('HttpResponse for getEnterpriseOpps::::'+httpResponse);
-            System.debug('getEnterpriseOpps - HttpResponse.getBody::::'+httpResponse.getBody());
+            // System.debug('HttpResponse for getEnterpriseOpps::::'+httpResponse);
+            // System.debug('getEnterpriseOpps - HttpResponse.getBody::::'+httpResponse.getBody());
         }catch(Exception e){
             System.debug('Exception in getEnterpriseOpps:::::'+e.getLineNumber()+'~~ message:::'+e.getMessage());
         }
@@ -140,13 +140,13 @@ public with sharing class multiOrgController {
         HttpResponse oppsResponse;
         try{
             if(dummyData){
-                System.debug('JD dummyData::'+dummyData);
+                // System.debug('JD dummyData::'+dummyData);
                 json2ApexOppsList=JSON2ApexOpps.parse(dummyDataOpps);
             }
             else{
                 oppsResponse= multiOrgController.getOppsfromOrgsAPI();
                 if(oppsResponse.getStatusCode() == 200){
-                    System.debug(oppsResponse.getBody());
+                    // System.debug(oppsResponse.getBody());
                     // System.debug(JSON2ApexCases.parse(casesResponse.getBody()));
                     json2ApexOppsList=JSON2ApexOpps.parse(oppsResponse.getBody());
                 }
@@ -162,7 +162,8 @@ public with sharing class multiOrgController {
                 obj.stage=oppsDataObj.stage;
                 obj.owner=oppsDataObj.owner;
                 if(dummyData){
-                    obj.closeDate=Date.valueOf(oppsDataObj.closeDate).addDays(Integer.valueof(daysAdd[i])).format();
+                    // obj.closeDate=Date.valueOf(oppsDataObj.closeDate).addDays(Integer.valueof(daysAdd[i])).format();
+                    obj.closeDate=addDaysToDate(oppsDataObj.closeDate,daysAdd[i]);
                 }
                 else{
                     obj.closeDate=oppsDataObj.closeDate;
@@ -178,8 +179,8 @@ public with sharing class multiOrgController {
         }catch(exception e){
             System.debug('Exception in oppDetailsList:::'+e.getMessage()+'~~~~~Line'+e.getLineNumber());
         }
-        System.debug('oppDetailsList::::'+oppDetailsList);
-        System.debug('oppDetailsList Size:::'+oppDetailsList.size());
+        // System.debug('oppDetailsList::::'+oppDetailsList);
+        // System.debug('oppDetailsList Size:::'+oppDetailsList.size());
         return oppDetailsList;
     }
 
@@ -236,8 +237,8 @@ public with sharing class multiOrgController {
         }catch(exception e){
             System.debug('Exception in activityDetailsList:::'+e.getMessage()+'~~~~~Line'+e.getLineNumber());
         }
-        System.debug('activityDetailsList::::'+activityDetailsList);
-        System.debug('activityDetailsList Size:::'+activityDetailsList.size());
+        // System.debug('activityDetailsList::::'+activityDetailsList);
+        // System.debug('activityDetailsList Size:::'+activityDetailsList.size());
         return activityDetailsList;
     }
 
@@ -245,6 +246,15 @@ public with sharing class multiOrgController {
     {
         Date d = system.today().addDays(Integer.valueof((Math.random() * 100)));
         String strDate = d.format().replace('-','/');
+        Date dStart = Date.parse(strDate);
+        DateTime dtDate=dStart;
+        return dtDate.format('yyyy-MM-dd');
+    }
+    
+    public static String addDaysToDate(String dt, Integer days)
+    {
+        Date d = Date.valueOf(dt).addDays(days);
+        String strDate = d.format();
         Date dStart = Date.parse(strDate);
         DateTime dtDate=dStart;
         return dtDate.format('yyyy-MM-dd');

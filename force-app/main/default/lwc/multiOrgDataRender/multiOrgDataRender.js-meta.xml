@@ -9,8 +9,8 @@
   </targets>
   <targetConfigs>  
     <targetConfig targets="lightning__RecordPage,lightning__AppPage,lightning__HomePage">
-        <property name="objType" type= "String" label="Select object" datasource="Case,Opportunity,Activity"/>
-        <property name="useDummyData" type= "Boolean" label="Use dummy data? If yes, you will be able to set the demo org names below." default="true"/>
+        <property name="objType" type= "String" label="Select object" datasource="Opportunity,Case,Activity"/>
+        <property name="useDummyData" type= "Boolean" label="Use dummy data? If yes, you will be able to set the demo org names below." default="false"/>
         <property name="heading" type="String" default="Enterprise Cases" label="Enter Title for the Component" />
         <property name="orgTitleA" type="String" default="Agency" label="Enter demo name for Org A" required="true"/>
         <property name="orgTitleB" type="String" default="Mergers Subsidiary" label="Enter demo name for Org B" required="true"/>

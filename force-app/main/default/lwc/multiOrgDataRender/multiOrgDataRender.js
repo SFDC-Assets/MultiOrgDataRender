@@ -287,8 +287,7 @@ export default class BasicDatatable extends LightningElement {
             if (this.objType == 'Case') {
                 this.isCases = true;
             }
-            console.log('Callout JS');
-            console.log(data);
+            // console.log(data);
             this.columnsCases = columnsCases;
             var tmpData = JSON.parse(JSON.stringify(data));
             if (this.useDummyData == true) {
@@ -312,27 +311,24 @@ export default class BasicDatatable extends LightningElement {
     doSortingCases(event) {
         this.sortByCases = event.detail.fieldName;
         this.sortDirectionCases = event.detail.sortDirection;
-        console.log("sortBy::" + this.sortByCases);
-        console.log("sortDirection::" + this.sortDirectionCases);
         this.sortDataCases(this.sortByCases, this.sortDirectionCases);
 
     }
     sortDataCases(fieldname, direction) {
-        console.log("inside sortdata");
         let parseData = JSON.parse(JSON.stringify(this.casesData));
-        console.log("parseData:" + parseData);
         // Return the value stored in the field
         let keyValue = (a) => {
             return a[fieldname];
         };
         // cheking reverse direction
         let isReverse = direction === 'asc' ? 1 : -1;
+
         // sorting data
         parseData.sort((x, y) => {
             x = keyValue(x) ? keyValue(x) : ''; // handling null values
             y = keyValue(y) ? keyValue(y) : '';
             // sorting values based on direction
-            return isReverse * ((x > y) - (y > x));
+            return isReverse * ((new Date(x).valueOf() > new Date(y).valueOf()) - (new Date(y).valueOf() > new Date(x).valueOf()));
         });
         this.casesData = parseData;
     }
@@ -349,8 +345,7 @@ export default class BasicDatatable extends LightningElement {
                 this.isOpps = true;
             }
 
-            console.log('Callout JS Opps');
-            console.log(data);
+            // console.log(data);
             this.columnsOpps = columnsOpps;
             var tmpData = JSON.parse(JSON.stringify(data));
             if (this.useDummyData == true) {
@@ -374,27 +369,24 @@ export default class BasicDatatable extends LightningElement {
     doSortingOpps(event) {
         this.sortByOpps = event.detail.fieldName;
         this.sortDirectionOpps = event.detail.sortDirection;
-        console.log("sortBy::" + this.sortByOpps);
-        console.log("sortDirection::" + this.sortDirectionOpps);
         this.sortDataOpps(this.sortByOpps, this.sortDirectionOpps);
 
     }
     sortDataOpps(fieldname, direction) {
-        console.log("inside sortdata");
         let parseData = JSON.parse(JSON.stringify(this.oppsData));
-        console.log("parseData:" + parseData);
         // Return the value stored in the field
         let keyValue = (a) => {
             return a[fieldname];
         };
         // cheking reverse direction
         let isReverse = direction === 'asc' ? 1 : -1;
+
         // sorting data
         parseData.sort((x, y) => {
             x = keyValue(x) ? keyValue(x) : ''; // handling null values
             y = keyValue(y) ? keyValue(y) : '';
             // sorting values based on direction
-            return isReverse * ((x > y) - (y > x));
+            return isReverse * ((new Date(x).valueOf() > new Date(y).valueOf()) - (new Date(y).valueOf() > new Date(x).valueOf()));
         });
 
         this.oppsData = parseData;
@@ -412,8 +404,7 @@ export default class BasicDatatable extends LightningElement {
                 this.isActivities = true;
             }
 
-            console.log('Callout JS Activities');
-            console.log(data);
+            // console.log(data);
             this.columnsActivities = columnsActivities;
             var tmpData = JSON.parse(JSON.stringify(data));
             if (this.useDummyData == true) {
@@ -437,27 +428,24 @@ export default class BasicDatatable extends LightningElement {
     doSortingActivities(event) {
         this.sortByActivities = event.detail.fieldName;
         this.sortDirectionActivities = event.detail.sortDirection;
-        console.log("sortBy::" + this.sortByActivities);
-        console.log("sortDirection::" + this.sortDirectionActivities);
         this.sortDataActivities(this.sortByActivities, this.sortDirectionActivities);
 
     }
     sortDataActivities(fieldname, direction) {
-        console.log("inside sortdata");
         let parseData = JSON.parse(JSON.stringify(this.activitiesData));
-        console.log("parseData:" + parseData);
         // Return the value stored in the field
         let keyValue = (a) => {
             return a[fieldname];
         };
         // cheking reverse direction
         let isReverse = direction === 'asc' ? 1 : -1;
+
         // sorting data
         parseData.sort((x, y) => {
             x = keyValue(x) ? keyValue(x) : ''; // handling null values
             y = keyValue(y) ? keyValue(y) : '';
             // sorting values based on direction
-            return isReverse * ((x > y) - (y > x));
+            return isReverse * ((new Date(x).valueOf() > new Date(y).valueOf()) - (new Date(y).valueOf() > new Date(x).valueOf()));
         });
         this.activitiesData = parseData;
     }

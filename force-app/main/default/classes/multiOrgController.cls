@@ -1,8 +1,8 @@
 public with sharing class multiOrgController {
-    public static String dummyDataCases='[{"owner":"Natalie Alexander","systemId":"test_id","createdDate":"06/28/2022","organizationName":"Agency Org","caseNumber":"00001183","subject":"Cant understand installation instructions","recordType":"0128a0000019S1MAAU","caseId":"00001183","priority":"Medium","status":"New"},{"owner":"Atticus Green","systemId":"test_id","createdDate":"08/25/2022","organizationName":"Agency Org","caseNumber":"00002078","subject":"Im having a billing issue","recordType":"0128a0000019S19AAE","caseId":"00002078","priority":"Medium","status":"Closed"},{"owner":"Dorian Garcia","systemId":"test_id","createdDate":"07/29/2022","organizationName":"Mergers Subsidiary","caseNumber":"00001164","subject":"Product setup issues","recordType":"0128a0000019S1MAAU","caseId":"00001164","priority":"High","status":"Closed"},{"owner":"Julianna Wong","systemId":"test_id","createdDate":"06/13/2022","organizationName":"Mergers Subsidiary","caseNumber":"00001213","subject":"How do I sign up for your email newsletter?","recordType":"0128a0000019S0IAAU","caseId":"00001213","priority":"Medium","status":"Closed"},{"owner":"Orlando Price","systemId":"test_id","createdDate":"10/02/2022","organizationName":"Group Insurance","caseNumber":"00001741","subject":"Problem with my bill","recordType":"0128a0000019S0IAAU","caseId":"00001741","priority":"Medium","status":"Closed"}]';
-    public static String dummyDataOpps='[{"owner":"Adam Smith","closeDate":"10/02/2022","systemId":"test_id","amount":"41000","organizationName":"Agency Org","stage":"Negotiation Review","name":"Portfolio Management"},{"owner":"Campbell Holland","closeDate":"11/04/2022","systemId":"test_id","amount":"112000","organizationName":"Agency Org","stage":"Value Proposition","name":"Mobile Service Addition"},{"owner":"Campbell Holland","closeDate":"11/10/2022","systemId":"test_id","amount":"22500","organizationName":"Mergers Subsidiary","stage":"Qualification","name":"Insurance Renewal"},{"owner":"Bonnie Brown","closeDate":"11/30/2022","systemId":"test_id","amount":"62000","organizationName":"Mergers Subsidiary","stage":"Proposal","name":"Service Agreement"},{"owner":"Cal Watkins","closeDate":"12/31/2022","systemId":"test_id","amount":"85000","organizationName":"Agency Org","stage":"Prospecting","name":"Product help"}]';
+    public static String dummyDataCases='[{"owner":"Natalie Alexander","systemId":"test_id","createdDate":"2022-06-28","organizationName":"Agency Org","caseNumber":"00001183","subject":"Cant understand installation instructions","recordType":"0128a0000019S1MAAU","caseId":"00001183","priority":"Medium","status":"New"},{"owner":"Atticus Green","systemId":"test_id","createdDate":"2022-08-25","organizationName":"Agency Org","caseNumber":"00002078","subject":"Im having a billing issue","recordType":"0128a0000019S19AAE","caseId":"00002078","priority":"Medium","status":"Closed"},{"owner":"Dorian Garcia","systemId":"test_id","createdDate":"2022-07-29","organizationName":"Mergers Subsidiary","caseNumber":"00001164","subject":"Product setup issues","recordType":"0128a0000019S1MAAU","caseId":"00001164","priority":"High","status":"Closed"},{"owner":"Julianna Wong","systemId":"test_id","createdDate":"2022-06-13","organizationName":"Mergers Subsidiary","caseNumber":"00001213","subject":"How do I sign up for your email newsletter?","recordType":"0128a0000019S0IAAU","caseId":"00001213","priority":"Medium","status":"Closed"},{"owner":"Orlando Price","systemId":"test_id","createdDate":"2022-10-02","organizationName":"Group Insurance","caseNumber":"00001741","subject":"Problem with my bill","recordType":"0128a0000019S0IAAU","caseId":"00001741","priority":"Medium","status":"Closed"}]';
+    public static String dummyDataOpps='[{"owner":"Adam Smith","closeDate":"2022-10-02","systemId":"test_id","amount":"41000","organizationName":"Agency Org","stage":"Negotiation Review","name":"Portfolio Management"},{"owner":"Campbell Holland","closeDate":"2022-11-04","systemId":"test_id","amount":"112000","organizationName":"Agency Org","stage":"Value Proposition","name":"Mobile Service Addition"},{"owner":"Campbell Holland","closeDate":"2022-11-10","systemId":"test_id","amount":"22500","organizationName":"Mergers Subsidiary","stage":"Qualification","name":"Insurance Renewal"},{"owner":"Bonnie Brown","closeDate":"2022-11-30","systemId":"test_id","amount":"62000","organizationName":"Mergers Subsidiary","stage":"Proposal","name":"Service Agreement"},{"owner":"Cal Watkins","closeDate":"2022-12-31","systemId":"test_id","amount":"85000","organizationName":"Agency Org","stage":"Prospecting","name":"Product help"}]';
     public static String dummyDataActivities='[{"name":"Gather all Project Documents","activityType":"Task","dueDate":"2022-10-23","assignedTo":"Hugo Mitchell","status":"Late In Progress"},{"name":"Project Meeting Kick off","activityType":"Task","dueDate":"2022-11-27","assignedTo":"Madelyn Ross","status":"In Progress"},{"name":"Review Contracts and Signature with Customer","activityType":"Task","dueDate":"2022-12-03","assignedTo":"Laila Peterson","status":"In Progress"},{"name":"Weekly Kickoff","activityType":"Event","dueDate":"2022-12-13","assignedTo":"Remi Gutierrez","status":"On Hold"},{"name":"Meet & Greet","activityType":"Event","dueDate":"2022-12-20","assignedTo":"Haven Jackson","status":"Scheduled"}]';
-    
+        
     public multiOrgController() {
         
     }
@@ -151,6 +151,8 @@ public with sharing class multiOrgController {
                     json2ApexOppsList=JSON2ApexOpps.parse(oppsResponse.getBody());
                 }
             }
+            Integer i=0;
+            Integer[] daysAdd =new Integer[] {14,28,42,49,84};
             for(JSON2ApexOpps oppsDataObj :json2ApexOppsList){
                 OppDetails obj= new OppDetails();
                 obj.name=oppsDataObj.name;
@@ -158,10 +160,20 @@ public with sharing class multiOrgController {
                 obj.systemId=oppsDataObj.systemId;
                 obj.amount=oppsDataObj.amount;
                 obj.stage=oppsDataObj.stage;
-                obj.closeDate=oppsDataObj.closeDate;
                 obj.owner=oppsDataObj.owner;
+                if(dummyData){
+                    obj.closeDate=Date.valueOf(oppsDataObj.closeDate).addDays(Integer.valueof(daysAdd[i])).format();
+                }
+                else{
+                    obj.closeDate=oppsDataObj.closeDate;
+                }
+                if (i<5)
+                {
+                    i++;
+                }
 
                 oppDetailsList.add(obj);
+                
             }
         }catch(exception e){
             System.debug('Exception in oppDetailsList:::'+e.getMessage()+'~~~~~Line'+e.getLineNumber());
@@ -214,7 +226,8 @@ public with sharing class multiOrgController {
                 obj.name=activitiesDataObj.name;
                 obj.activityType=activitiesDataObj.activityType;
                 // obj.dueDate=activitiesDataObj.dueDate;
-                obj.dueDate=system.today().addDays(Integer.valueof((Math.random() * 30))).format();
+                // obj.dueDate=system.today().addDays(Integer.valueof((Math.random() * 30))).format();
+                obj.dueDate=getRandomFutureDate();
                 obj.assignedTo=activitiesDataObj.assignedTo;
                 obj.status=activitiesDataObj.status;
     
@@ -226,5 +239,14 @@ public with sharing class multiOrgController {
         System.debug('activityDetailsList::::'+activityDetailsList);
         System.debug('activityDetailsList Size:::'+activityDetailsList.size());
         return activityDetailsList;
+    }
+
+    public static String getRandomFutureDate()
+    {
+        Date d = system.today().addDays(Integer.valueof((Math.random() * 100)));
+        String strDate = d.format().replace('-','/');
+        Date dStart = Date.parse(strDate);
+        DateTime dtDate=dStart;
+        return dtDate.format('yyyy-MM-dd');
     }
 }

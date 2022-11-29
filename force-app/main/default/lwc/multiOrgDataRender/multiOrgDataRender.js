@@ -52,7 +52,8 @@ const columnsCases = [{
         typeAttributes: {
             month: "2-digit",
             day: "2-digit",
-            year: "numeric"
+            year: "numeric",
+            timeZone: "GMT"
         }
     },
     {
@@ -127,7 +128,8 @@ const columnsOpps = [{
         typeAttributes: {
             month: "2-digit",
             day: "2-digit",
-            year: "numeric"
+            year: "numeric",
+            timeZone: "GMT"
         }
     },
     {
@@ -203,7 +205,8 @@ const columnsActivities = [{
         typeAttributes: {
             month: "2-digit",
             day: "2-digit",
-            year: "numeric"
+            year: "numeric",
+            timeZone: "GMT"
         }
     },
     {
@@ -393,6 +396,7 @@ export default class BasicDatatable extends LightningElement {
             // sorting values based on direction
             return isReverse * ((x > y) - (y > x));
         });
+
         this.oppsData = parseData;
     }
 

@@ -1,5 +1,6 @@
 {
-    "orgName": "jtase company",
+    "orgName": "Multi-Org Demo",
+    "hasSampleData": true,
     "edition": "Enterprise",
     "features": ["EnableSetPasswordInApi", "LightningServiceConsole", "ServiceCloud", "ServiceUser", "PersonAccounts", "ContactsToMultipleAccounts", "FinancialServicesUser:2", "FinancialServicesInsuranceUser", "FinancialServicesCommunityUser:1"],
     "settings": {

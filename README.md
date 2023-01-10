@@ -1,18 +1,5 @@
-# Salesforce DX Project: Next Steps
+# Render Data from Multiple Salesforce Orgs
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+This art of the possible  demo LWC component displays to an end-user the experience of all the various upcoming opportunities, cases and activities across the different orgs their account/person has. The demo is derived off a real endpoint web service that taps into 4 other orgs, specifically a Mule API that fetches records from each org and consolidate data for rendering.
 
-## How Do You Plan to Deploy Your Changes?
-
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
-
-## Configure Your Salesforce DX Project
-
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
-
-## Read All About It
-
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+There is also an option to demo using mock/dummy data if for some reason you don't want to pull actual data from the Salesforce orgs via APIs. 

@@ -1,13 +1,13 @@
 {
-  "orgName": "jtase company",
-  "edition": "Developer",
-  "features": ["EnableSetPasswordInApi"],
-  "settings": {
-    "lightningExperienceSettings": {
-      "enableS1DesktopEnabled": true
-    },
-    "mobileSettings": {
-      "enableS1EncryptedStoragePref2": false
+    "orgName": "jtase company",
+    "edition": "Enterprise",
+    "features": ["EnableSetPasswordInApi", "LightningServiceConsole", "ServiceCloud", "ServiceUser", "PersonAccounts", "ContactsToMultipleAccounts", "FinancialServicesUser:2", "FinancialServicesInsuranceUser", "FinancialServicesCommunityUser:1"],
+    "settings": {
+        "lightningExperienceSettings": {
+            "enableS1DesktopEnabled": true
+        },
+        "mobileSettings": {
+            "enableS1EncryptedStoragePref2": false
+        }
     }
-  }
 }

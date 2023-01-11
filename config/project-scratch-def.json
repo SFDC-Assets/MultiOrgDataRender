@@ -2,7 +2,7 @@
     "orgName": "Multi-Org Demo",
     "hasSampleData": true,
     "edition": "Developer",
-    "features": ["EnableSetPasswordInApi", "LightningServiceConsole", "ServiceCloud", "ServiceUser", "PersonAccounts", "ContactsToMultipleAccounts", "FinancialServicesUser:2", "FinancialServicesInsuranceUser", "FinancialServicesCommunityUser:1"],
+    "features": ["EnableSetPasswordInApi", "LightningServiceConsole", "ServiceCloud", "ServiceUser", "PersonAccounts", "ContactsToMultipleAccounts"],
     "settings": {
         "lightningExperienceSettings": {
             "enableS1DesktopEnabled": true

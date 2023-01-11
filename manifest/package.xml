@@ -2,6 +2,7 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
 		<members>MultiOrgMuleAPI</members>
+		<members>Account_Record_Page</members>
 	</types>
 	<version>55.0</version>
 </Package>

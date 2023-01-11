@@ -34,6 +34,12 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>cooper:companyInsightTeaserCard</componentName>
+                <identifier>cooper_companyInsightTeaserCard</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>heading</name>
                     <value>Enterprise Opportunities</value>

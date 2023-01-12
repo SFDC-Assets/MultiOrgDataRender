@@ -70,13 +70,13 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>useDummyData</name>
-                    <value>true</value>
+                    <value>false</value>
                 </componentInstanceProperties>
                 <componentName>multiOrgDataRender</componentName>
                 <identifier>c_multiOrgDataRender</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
+        <!-- <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
                     <name>heading</name>
@@ -151,7 +151,7 @@
                 <componentName>multiOrgDataRender</componentName>
                 <identifier>c_multiOrgDataRender3</identifier>
             </componentInstance>
-        </itemInstances>
+        </itemInstances> -->
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>

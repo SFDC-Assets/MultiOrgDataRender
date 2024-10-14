@@ -1,5 +1,6 @@
-sfdx shane:org:create -f config/project-scratch-def.json -d 3 -s --wait 60 --userprefix platform -o multiOrgDataRender.demo
-sfdx force:source:push
-sfdx shane:user:password:set -g User -l User -p salesforce1
-sfdx force:data:bulk:upsert -s Account -f data/Accounts.csv -i ID -w 3
-sfdx force:org:open -p /lightning/o/Account/list
+sf demoutil org create scratch -f config/project-scratch-def.json -d 5 -s -p platform -e multiOrgDataRender.demo
+
+sf project deploy start
+sf demoutil user password set -p salesforce1 -g User -l User
+sf data upsert bulk -s Account -f data/Accounts.csv -i ID -w 3
+sf org open -p /lightning/o/Account/list
